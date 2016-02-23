@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+    h1.
+        Blob ID: #{blob._id}
+    p Name: #{blob.name}
+    p Query: #{blob.query}
+    p Badge: #{blob.badge}
+    p Submit date: #{blobdate}
+    p Flagged: #{blob.isChecked}
+    a(href='/blobs/#{blob._id}/download') Download
+    br
+    a(href='/blobs/') Back

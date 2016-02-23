@@ -1,0 +1,18 @@
+extends ../layout
+
+block content
+	h1.
+		#{title}
+	form#formAddBlob(name="addblob",method="post",action="/blobs")
+		p Short description: 
+			input#inputName(type="text", placeholder="ex. Mexico nodes", name="name", required='')
+		p Query: 
+			input#inputQuery(type="text", placeholder="ex. SELECT *", name="query", required='')
+		p Badge:
+			input#inputBadge(type="number", placeholder="ex. 123456", name="badge", required='')
+		p Submit date: 
+			input#inputDate(type="date", name="date", required='')
+		p Flag: 
+			input#inputIsChecked(type="checkbox", name="isChecked")
+		p
+			button#btnSubmit(type="submit") submit

@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1.
+         #{title}
+
+    p List of collections in MongoDB
+
+    - each collection, i in collections
+        li 
+            a(href='/#{collection.name}') #{collection.name}
+            

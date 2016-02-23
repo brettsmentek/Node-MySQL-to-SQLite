@@ -1,0 +1,21 @@
+extends ../layout
+
+block content
+	h1.
+		Blob ID: #{blob._id}
+	form(action='/blobs/#{blob._id}/edit',method='post',name='updateblob',enctype='application/x-www-form-urlencoded')
+		p Name:
+			input#inputName(type='text', value='#{blob.name}', name='name', required='')
+		p Query:
+			input#inputQuery(type='text', value='#{blob.query}', name='query', required='')
+		p Badge:
+			input#inputBadge(type='number', value='#{blob.badge}', name='badge', required='')
+		p Submit date:
+			input#inputDate(type='date', value='#{blobdate}', name='date', required='')
+		p Flag:
+			input#inputIsChecked(type='checkbox', name='isChecked', checked=('#{blob.isChecked}'==='true' ? "checked" : undefined))
+		p
+			input(type='hidden',value='PUT',name='_method')
+		p
+			button#btnSubmit(type='submit').
+				Update

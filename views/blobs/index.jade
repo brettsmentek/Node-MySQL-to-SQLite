@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+    h1.
+         #{title}
+    p
+        a(href='/blobs/new') Create a new query
+    table
+        tr
+            td= 'Description'
+            td= 'Query'
+            td= 'Badge'
+            td= 'Submit date'
+            td= 'Flagged'
+            td= 'Edit'
+            td= 'Show'
+            td= 'Delete'
+            td= 'Run'
+            td= 'Download'
+                - each blob, i in blobs
+                    tr
+                        td= blob.name
+                        td= blob.query
+                        td= blob.badge
+                        td #{moment(blob.date).format('YYYY-MM-DD')}
+                        td= blob.isChecked
+                        td
+                            a(href='/blobs/#{blob._id}/edit') Edit
+                        td
+                            a(href='/blobs/#{blob._id}') Show
+                        td
+                            form(action='/blobs/#{blob._id}/edit',method='post',enctype='application/x-www-form-urlencoded')
+                                input(type='hidden',value='DELETE',name='_method')
+                                button(type='submit').
+                                    Delete
+                        td
+                            a(href='/blobs/#{blob._id}/run') Run
+                        td
+                            a(href='/blobs/#{blob._id}/download') Download

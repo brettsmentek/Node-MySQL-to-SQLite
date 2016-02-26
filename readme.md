@@ -6,6 +6,7 @@ This project creates an interface for converting raw SQL queries to a MySQL data
 - Clone
 - Make sure MongoDB is installed
 - Create a MongoDB database named 'MyMongoDB'
+- Add your connection data to runQuery.js
 - Install packages and start the Express.js web service (`npm install && npm start`)
 - Navigate to `http://127.0.0.1:3000`
 

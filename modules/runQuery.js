@@ -14,7 +14,6 @@ function runQuery(blob) {
     }
   });
 
-  //var queryObject = simpleSqlParser.sql2ast(blob.query);
   var queryString = blob.query.toString();
   var databaseID = blob._id;
   // new way to get MySQL results
@@ -27,7 +26,10 @@ function runQuery(blob) {
       }
       columnStr = keys.toString();
       var db = new sqlite3.Database('./data/' + databaseID + '.db');
+      //var db = new sqlite3.Database(':memory:');
+      var startTime = Date.now();
       db.serialize(function() {
+        db.run('BEGIN TRANSACTION');
         var valuesStr = '?';
         if (keys.length > 1)
           for (var k = 2; k <= keys.length; k++) {
@@ -49,8 +51,16 @@ function runQuery(blob) {
           }
           stmt.finalize();
         }
+
+        db.each('SELECT * FROM ' + 'Table_name', function(err, row) {
+          console.log(row.id + ': ' + row.info);
+        });
+
+        db.run('COMMIT');
       });
-      db.close();
+      db.close(function() {
+        console.log((Date.now() - startTime) + ' ms');
+      });
     } else {
       console.log('Error in data')
     }
